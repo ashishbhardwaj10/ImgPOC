@@ -1,0 +1,43 @@
+﻿<style>
+    .demo-mat-card {
+        max-width: 400px;
+    }
+
+    .demo-mat-card-content {
+        padding: 1rem;
+    }
+
+    .demo-mat-card-clean-margin {
+        margin: 0px;
+    }
+
+    .scroll-over {
+        overflow: scroll;
+    }
+</style>
+<MatDialogTitle style="display: flex; align-items: center;">
+    <div style="flex: 1;">Details</div>
+    <div @onclick="@(_=>CloseDialog())" style="cursor: pointer;">
+        <MatIcon Icon="@MatIconNames.Close"></MatIcon>
+    </div>
+</MatDialogTitle>
+<MatDialogContent>
+    <MatCard class="demo-mat-card">
+        <MatCardContent>
+            <MatCardMedia Wide="true" ImageUrl="@ImgSource">
+                <div class="demo-mat-card-content" style="color: white;">
+                    <MatSubtitle2 class="demo-mat-card-clean-margin">
+                        by @Name
+                    </MatSubtitle2>
+                </div>
+            </MatCardMedia>
+            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                Visit ten places on our planet that are undergoing the biggest changes today.
+            </MatBody2>
+        </MatCardContent>
+    </MatCard>
+    <MatButton OnClick="@(_ => CloseDialog())">OK</MatButton>
+</MatDialogContent>
+<MatDialogActions>
+
+</MatDialogActions>

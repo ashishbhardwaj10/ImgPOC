@@ -1,0 +1,45 @@
+﻿@page "/dashboard"
+@using ImgPOC.Store.DashboardUseCase
+@inject HttpClient Http
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+@inject IMatDialogService MatDialogService
+
+<PageTitle>Dashboard - Images</PageTitle>
+
+<style>
+    .demo-mat-card {
+        max-width: 400px;
+    }
+
+    .demo-mat-card-content {
+        padding: 1rem;
+    }
+
+    .demo-mat-card-clean-margin {
+        margin: 0px;
+    }
+    .scroll-over{
+        overflow: scroll;
+    }
+</style>
+
+@if (DashboardState.Value.IsLoading)
+{
+    <p><em>Loading...</em></p>
+}
+@if (DashboardState.Value.PhotoPage?.photos != null)
+{
+    @foreach (var photo in DashboardState.Value.PhotoPage.photos)
+    {
+        <MatCard class="demo-mat-card">
+            <MatCardContent>
+                <MatCardMedia Wide="true" ImageUrl="@photo.src.original"></MatCardMedia>
+            </MatCardContent>
+            <MatCardActions>
+                <MatCardActionButtons>
+                    <MatButton OnClick="@(_ => OpenDialogFromService(@photo.src.tiny,@photo.id,@photo.photographer))">Details</MatButton>
+                </MatCardActionButtons>
+            </MatCardActions>
+        </MatCard>
+    }
+}
