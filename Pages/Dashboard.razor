@@ -18,7 +18,8 @@
     .demo-mat-card-clean-margin {
         margin: 0px;
     }
-    .scroll-over{
+
+    .scroll-over {
         overflow: scroll;
     }
 </style>
@@ -31,15 +32,26 @@
 {
     @foreach (var photo in DashboardState.Value.PhotoPage.photos)
     {
-        <MatCard class="demo-mat-card">
-            <MatCardContent>
-                <MatCardMedia Wide="true" ImageUrl="@photo.src.original"></MatCardMedia>
-            </MatCardContent>
-            <MatCardActions>
-                <MatCardActionButtons>
-                    <MatButton OnClick="@(_ => OpenDialogFromService(@photo.src.tiny,@photo.id,@photo.photographer))">Details</MatButton>
-                </MatCardActionButtons>
-            </MatCardActions>
-        </MatCard>
+        int counter = 0;
+        <div class="mat-layout-grid">
+            <div class="mat-layout-grid-inner">
+                <div class="mat-layout-grid-cell">
+                    @if (counter == 0)
+                    {
+                        <MatCard class="demo-mat-card">
+                            <MatCardContent>
+                                <MatCardMedia Wide="true" ImageUrl="@photo.src.original"></MatCardMedia>
+                            </MatCardContent>
+                            <MatCardActions>
+                                <MatCardActionButtons>
+                                    <MatButton OnClick="@(_ => OpenDialogFromService(@photo.src.tiny,@photo.id,@photo.photographer))">Details</MatButton>
+                                </MatCardActionButtons>
+                            </MatCardActions>
+                        </MatCard>
+                        counter++;
+                    }
+                </div>
+            </div>
+        </div>
     }
 }
