@@ -1,0 +1,54 @@
+﻿@page "/images"
+<MatToastContainer />
+<PageTitle>Images</PageTitle>
+<EditForm Model="@image" OnValidSubmit="@(_ => Success())">
+    <DataAnnotationsValidator />
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
+                Image Details <br />
+                <p>
+                    <MatTextField Label="Name" @bind-Value="image.Name" />
+                    <ValidationMessage For="@(() => image.Name)" />
+                </p>
+                <p>
+                    <MatTextField Label="Photographer" @bind-Value="image.Photographer" />
+                    <ValidationMessage For="@(() => image.Photographer)" />
+                </p>
+                <p>
+                    <MatTextField Label="ImageUrl" @bind-Value="image.ImageUrl" />
+                    <ValidationMessage For="@(() => image.ImageUrl)" />
+                </p><br />
+                <MatButton Type="submit" Raised="true">Save</MatButton>
+                <MatButton Raised="true" OnClick="@(_ => Reset())">Reset</MatButton>
+            </div>
+        </div>
+    </div>
+</EditForm>
+<br />
+@if (tableData.Count > 0)
+{
+    <MatTable Items="@tableData" class="mat-elevation-z5" AllowSelection="true" SelectionChanged="SelectionChangedEvent">
+        <MatTableHeader>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Photographer</th>
+            <th>Url</th>
+            <th>Actions</th>
+        </MatTableHeader>
+        <MatTableRow>
+            <td>@context.Id</td>
+            <td>@context.Name</td>
+            <td>@context.Photographer</td>
+            <td>@context.ImageUrl</td>
+            <td>
+                <MatIconButton OnClick="@(_ => Edit(context.Id))">
+                    <MatIcon>@MatIconNames.Edit</MatIcon>
+                    </MatIconButton>
+                    <MatIconButton OnClick="@(_ => Delete(context.Id))">
+                        <MatIcon>@MatIconNames.Delete_forever</MatIcon>
+                    </MatIconButton>
+                </td>
+            </MatTableRow>
+        </MatTable>
+}

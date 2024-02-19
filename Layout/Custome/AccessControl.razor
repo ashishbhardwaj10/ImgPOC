@@ -14,7 +14,7 @@
 </AuthorizeView>
 
 @code {
-    private async Task BeginSignOut(MouseEventArgs args){
+    private void BeginSignOut(MouseEventArgs args){
         Microsoft.AspNetCore.Components.WebAssembly.Authentication.NavigationManagerExtensions.NavigateToLogout(Navigation,"authentication/logout");
     }
 }

@@ -1,10 +1,15 @@
 ﻿using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 
 namespace ImgPOC.SharedComponent
-{    public partial class Dialog
+{
+    public partial class Dialog
     {
+        [Inject]
+        private IJSRuntime JS { get; set; }
         [Parameter]
         public int Id { get; set; } = 1;
         [Parameter]
@@ -14,11 +19,16 @@ namespace ImgPOC.SharedComponent
         [CascadingParameter]
         public MatDialogReference? DialogReference { get; set; }
 
-        private void CloseDialog()
+        private async void CloseDialog()
         {
-            
-            //document.querySelector("body.mdc-dialog-scroll-lock")?.classList.remove("mdc-dialog-scroll-lock");
             DialogReference?.Close("Test");
+            await JS.InvokeVoidAsync("RemoveScrollClass");
+        }
+        public void Dispose()
+        {
+            // The following prevents derived types that introduce a
+            // finalizer from needing to re-implement IDisposable.
+            GC.SuppressFinalize(this);
         }
     }
 }
