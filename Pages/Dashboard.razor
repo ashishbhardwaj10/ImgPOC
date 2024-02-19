@@ -3,34 +3,8 @@
 @inject HttpClient Http
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 @inject IMatDialogService MatDialogService
-@* @attribute [Authorize] *@
+@attribute [Authorize]
 <PageTitle>Dashboard - Images</PageTitle>
-
-<style>
-    .demo-mat-card {
-        max-width: 400px;
-    }
-
-    .demo-mat-card-content {
-        padding: 1rem;
-    }
-
-    .demo-mat-card-clean-margin {
-        margin: 0px;
-    }
-
-    .spinner {
-        /* border: 16px solid silver;
-        border-top: 16px solid #337AB7;
-        border-radius: 50%; */
-        width: 80px;
-        height: 80px;
-        animation: spin 700ms linear infinite;
-        top: 40%;
-        left: 55%;
-        position: absolute;
-    }
-</style>
 
 @if (DashboardState.Value.IsLoading)
 {

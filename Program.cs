@@ -1,8 +1,11 @@
+using Blazored.LocalStorage;
 using Fluxor;
 using ImgPOC;
 using MatBlazor;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -23,5 +26,18 @@ builder.Services.AddOidcAuthentication(options =>
 });
 
 builder.Services.AddMatBlazor();
+builder.Services.AddMatToaster(config =>
+{
+    config.Position = MatToastPosition.TopCenter;
+    config.PreventDuplicates = true;
+    config.NewestOnTop = true;
+    config.ShowCloseButton = true;
+    config.MaximumOpacity = 95;
+    config.VisibleStateDuration = 2000;
+});
+builder.Services.AddBlazoredLocalStorage(config =>
+{
+    config.JsonSerializerOptions.WriteIndented = true;
+});
 
 await builder.Build().RunAsync();

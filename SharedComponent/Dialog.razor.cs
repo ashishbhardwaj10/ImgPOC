@@ -6,9 +6,10 @@ using System.Runtime.InteropServices;
 
 namespace ImgPOC.SharedComponent
 {
-    public partial class Dialog//(IJSRuntime js) : IDisposable
+    public partial class Dialog
     {
-        private readonly IJSRuntime? js;
+        [Inject]
+        private IJSRuntime JS { get; set; }
         [Parameter]
         public int Id { get; set; } = 1;
         [Parameter]
@@ -18,11 +19,10 @@ namespace ImgPOC.SharedComponent
         [CascadingParameter]
         public MatDialogReference? DialogReference { get; set; }
 
-        private MatProgressCircle matC;
         private async void CloseDialog()
         {
             DialogReference?.Close("Test");
-            await js.InvokeVoidAsync("RemoveScrollClass");
+            await JS.InvokeVoidAsync("RemoveScrollClass");
         }
         public void Dispose()
         {
